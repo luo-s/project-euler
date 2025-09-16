@@ -1,5 +1,5 @@
 # problem/__init__.py
-from problem.p1_multiples_of_3_or_5 import multiples_of_3_or_5
+from problem.p001_multiples_of_3_or_5 import multiples_of_3_or_5
 
 import pytest
 
