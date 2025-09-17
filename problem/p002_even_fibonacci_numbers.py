@@ -11,6 +11,7 @@
 # fiboEvenSum(100000) should return 60696.
 # fiboEvenSum(4000000) should return 4613732.
 
+############################################################
 # first approach
 def fiboEvenSum(n):
     if n < 2: 
@@ -31,6 +32,7 @@ def fiboEvenSum(n):
             total += b
     return total
 
+############################################################
 # more clear logic
 def fiboEvenSum(n):
     a, b = 1, 2
