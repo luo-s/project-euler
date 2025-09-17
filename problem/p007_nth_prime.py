@@ -8,17 +8,20 @@
 # nthPrime(1000) should return 7919.
 # nthPrime(10001) should return 104743.
 
+############################################################
 # Python prime library https://pypi.org/project/primePy/ 
 # primePy is slow
 from primePy import primes
 def nthPrime(n):
     return primes.first(n)[-1]
 
+############################################################
 # syspy library https://www.sympy.org/en/index.html
 from sympy import prime
 def nthPrime(n):
     return prime(n)
 
+############################################################
 # brute force
 def nthPrime(n):
     if n == 2: return 2 # handle 2 separately to skip unnecessary numbers
@@ -38,6 +41,7 @@ def isPrime(n):
             return False
     return True
 
+############################################################
 # we can use sieve of Eratosthenes when knowing the upper bound of nth prime
 import math
 
