@@ -7,3 +7,15 @@ The motivation for starting Project Euler, and its continuation, is to provide a
 ### Purpose
 
 The primary goal of this repository is to track the progress of solving these problems. It also serves as a platform to document the key ideas and thought processes behind the solutions.
+
+### A List of Key Ideas
+
+- Prime number
+
+  - How to check primality?
+  - How to find all prime numbers up to a given limit?
+
+- LCD and GCD
+
+  - How LCM and GCD are related?
+  - How to calculate LCM and GCD?
