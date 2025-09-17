@@ -1,5 +1,3 @@
-# Prime Number
-
 ## Check for Prime Numbers
 
 ### Brute Force (Basic Trial Division)
@@ -100,7 +98,7 @@ def is_prime_mr(n):
 
 ### [Sieve of Eratosthenes](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes)
 
-The sieve of Eratosthenes is an ancient algorithm for finding all prime numbers up to any given limit.
+The sieve of Eratosthenes is an ancient algorithm for finding all prime numbers up to any given limit. Time complexity $O(n \log \log n)$, Space complexity $O(n)$.
 
 ```
 import math
