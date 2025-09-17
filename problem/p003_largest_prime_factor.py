@@ -10,7 +10,7 @@
 # largestPrimeFactor(13195) should return 29.
 # largestPrimeFactor(600851475143) should return 6857.
 
-# brute force: time consuming for checking prime number one by one
+# brute force: time consuming for checking every possivle factor and prime number one by one
 import math
 def largestPrimeFactor(n):
     lpf = 1
@@ -29,7 +29,17 @@ def isPrime(n):
     return True
 
 
-# n //= i: filter all non-prime factors, and n becomes small quickly
+# n //= i: prime factorization, and n becomes small quickly
+def largestPrimeFactor(n):
+    i = 2
+    while i * i <= n:
+        if n % i:
+            i += 1
+        else:
+            n //= i
+    return n
+
+# with optimization (handle the special prime number separately)
 import math
 def largestPrimeFactor(n):
     # Remove factors of 2
