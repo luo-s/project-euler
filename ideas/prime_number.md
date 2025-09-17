@@ -24,6 +24,7 @@ This approach is slow with $O(\sqrt{n})$ Time and $O(1)$ space.
 
 ```
 import math
+
 def isPrime(n):
     if n <= 1:
         return False
@@ -42,6 +43,7 @@ Every prime number above 3 can be written as $6k \pm 1$. This complexcity rstays
 
 ```
 import math
+
 def is_prime(n):
     if n < 2:
         return False
@@ -102,6 +104,7 @@ The sieve of Eratosthenes is an ancient algorithm for finding all prime numbers 
 
 ```
 import math
+
 def sieve_of_eratosthenes(n):
     if n < 2:
         return []
