@@ -6,6 +6,7 @@
 # largestPalindromeProduct(2) should return 9009.
 # largestPalindromeProduct(3) should return 906609.
 
+############################################################
 # brute force: check every single possible product
 def largestPalindromeProduct(n):
     hi, lo = pow(10, n) - 1, pow(10, n-1)
@@ -16,6 +17,7 @@ def largestPalindromeProduct(n):
                 ans = max(ans, i * j)
     return ans
 
+############################################################
 # optimized version (pruned double loop) 
 def largestPalindromeProduct(n):
     hi, lo = pow(10, n) - 1, pow(10, n-1)
@@ -33,6 +35,7 @@ def largestPalindromeProduct(n):
                 break  # for this i, no smaller j will give a larger prod
     return best
 
+############################################################
 # assistant function: check palindrome
 def isPalindrome(n):
     s = str(n)
