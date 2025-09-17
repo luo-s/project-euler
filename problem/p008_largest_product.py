@@ -4,6 +4,7 @@
 # largestProductinaSeries(4) should return 5832.
 # largestProductinaSeries(13) should return 23514624000.
 
+############################################################
 # brute force
 def largestProductinaSeries(n):
     max_prod = 0
@@ -14,6 +15,7 @@ def largestProductinaSeries(n):
         max_prod = max(max_prod, prod)
     return max_prod
 
+############################################################
 # split by 0s and using sliding window technique
 def largestProductinaSeries(n):
     chunks = ''.join(map(str, thousandDigits)).split('0')
