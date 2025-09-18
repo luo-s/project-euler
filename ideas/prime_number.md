@@ -60,7 +60,7 @@ def is_prime(n):
     return True
 ```
 
-### [Miller–Rabin Primality Test (Fast for Large n)](https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test)
+### [Miller–Rabin Primality Test](https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test)
 
 Miller–Rabin Primality Test is a probabilistic primality test, but with selected bases, it becomes deterministic for 32-bit or 64-bit integers. The time complexity drops to $O(\log^3 n)$.
 
@@ -98,7 +98,7 @@ def is_prime_mr(n):
 
 ## Find Prime Numbers
 
-### [Sieve of Eratosthenes](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes)
+### Find Prime Numbers with a Given Limit: [Sieve of Eratosthenes](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes)
 
 The sieve of Eratosthenes is an ancient algorithm for finding all prime numbers up to any given limit. Time complexity $O(n \log \log n)$, Space complexity $O(n)$.
 
@@ -123,4 +123,70 @@ def sieve_of_eratosthenes(n):
     # Extract all primes
     primes = [i for i, prime in enumerate(is_prime) if prime]
     return primes
+```
+
+### Find the nth Prime Number
+
+- Brute Force Method: count prime number 1 by 1
+
+```
+def nthPrime(n):
+    if n == 2: return 2 # handle 2 separately to skip unnecessary numbers
+    i, count = 3, 1
+    while count < n:
+        if isPrime(i):
+            count += 1
+        i += 2
+    return i - 2
+
+import math
+def isPrime(n):
+    if n <= 1:
+        return False
+    for i in range(2, math.isqrt(n) + 1):
+        if n % i == 0:
+            return False
+    return True
+```
+
+- We need a upper bond to use the Sieve of Eratosthenes
+  - In math, we know the upper bound for nth prime is: p_n ≤ n(ln n + ln ln n) for n>= 6
+
+```
+import math
+
+def upper_bound(n: int) -> int:
+    if n < 6:
+        return 15
+    return int(n * (math.log(n) + math.log(math.log(n))) ) + 10  # small cushion
+
+def sieve(n):
+    if n < 2:
+        return []
+
+    # Initialize all numbers as potential primes
+    is_prime = [True] * (n + 1)
+    is_prime[0] = is_prime[1] = False  # 0 and 1 are not primes
+
+    # Sieve process
+    for p in range(2, math.isqrt(n) + 1):
+        if is_prime[p]:
+            # Mark multiples of p as False (composite)
+            for multiple in range(p*p, n+1, p):
+                is_prime[multiple] = False
+
+    # Extract all primes
+    primes = [i for i, prime in enumerate(is_prime) if prime]
+    return primes
+
+def nthPrime(n):
+    if n == 1:
+        return 2
+    bound = upper_bound(n)
+    primes = sieve(bound)
+    # If the cushion under-shoots (rare), expand and retry.
+    while len(primes) < n:
+        bound = int(bound * 1.2) + 1
+        primes = sieve(bound)
+    return primes[n - 1]
 ```
