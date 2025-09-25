@@ -1,4 +1,4 @@
-from problem.p16_power_digit_sum import power_digit_sum
+from problem.p016_power_digit_sum import power_digit_sum
 
 import pytest
 
