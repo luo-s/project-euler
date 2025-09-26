@@ -14,7 +14,7 @@ def sum_factorial_digits(n):
         fac //= 10
     return total
 
-# optimized with string method
+# optimized with the string method
 import math
 def sum_factorial_digits(n):
     return sum(map(int, str(math.factorial(n))))
