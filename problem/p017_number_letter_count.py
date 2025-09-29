@@ -53,3 +53,32 @@ def count_number(n: int) -> int:
     # Final sub-1000 chunk
     total += _under_1000(remaining)
     return total
+
+############################################################
+# a simplified version count up to 10000
+
+def num_char_cnt(n):
+    ans = 0
+    for i in range(1, n + 1):
+        ans += char_cnt(i)
+    return ans
+
+def char_cnt(n):
+    ones = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve",
+            "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
+    tens = [None, None, "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
+    d1, d2, d3, d4 = n % 10, (n % 100) // 10, (n % 1000) // 100, n // 1000
+    cnt = 0
+    if d2 < 2:
+        index = d2 * 10 + d1
+        cnt += len(ones[index])
+    elif d2 >= 2:
+        cnt += len(tens[d2]) + len(ones[d1])
+    if d3 > 0:
+        if d1 == 0 and d2 == 0:
+             cnt += len('hundred') + len(ones[d3])
+        else:
+            cnt += (len('hundred') + len('and')) + len(ones[d3])
+    if d4 > 0:
+        cnt += len('thousand') + len(ones[d4])
+    return cnt
