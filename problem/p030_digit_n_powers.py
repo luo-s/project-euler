@@ -9,19 +9,21 @@
 
 # Find the sum of all the numbers that can be written as the sum of n powers of their digits.
 
-# what's the upper bound?
-# for a k-digit number, the largest sum of n-th power of digits is k * 9^n
-# and k * 9^n >= 10^(k - 1)
-# different n will have different upper bound
+# what's the upper bound? (different n will have different upper bound)
+# For a k-digit number, the largest sum of n-th power of digits is k * 9^n, the smallest k-digit number is 10^(k - 1).
+# If such k-digit number exists, k * 9^n >= 10^(k - 1) must hold.
+# At the beginning, 10^(k - 1) < k * 9^n;
+# as k grows, 10^(k - 1) grows exponentially, while k * 9^n grows linearly;
+# eventually, 10^(k - 1) > k * 9^n will happen (exceed the upper bound)
 
 def digit_n_powers(n):
     pow_d = [d ** n for d in range(10)] # [0^n, 1^n, 2^n, ..., 9^n]
-    nine_n = pow_d[9]   # 9^n
+    NINE_N = 9 ** n   # 9^n
     
-    # find the upper bound
+    # find the upper bound for k-digit number
     k, upper = 1, 0
-    while k * nine_n >= 10 ** (k - 1):
-        upper = k * nine_n
+    while k * NINE_N >= 10 ** (k - 1):
+        upper = k * NINE_N
         k += 1
     
     return sum(
