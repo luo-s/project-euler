@@ -3,7 +3,7 @@
 # 1634 = 1^4 + 6^4 + 3^4 + 4^4
 # 8208 = 8^4 + 2^4 + 0^4 + 8^4
 # 9474 = 9^4 + 4^4 + 7^4 + 4^4
-# As 1 = 14 is not a sum it is not included.
+# As 1 = 1^4 is not a sum it is not included.
 
 # The sum of these numbers is 1634 + 8208 + 9474 = 19316.
 
@@ -17,7 +17,7 @@
 # eventually, 10^(k - 1) > k * 9^n will happen (exceed the upper bound)
 
 def digit_n_powers(n):
-    pow_d = [d ** n for d in range(10)] # [0^n, 1^n, 2^n, ..., 9^n]
+    POW_D = [d ** n for d in range(10)] # [0^n, 1^n, 2^n, ..., 9^n]
     NINE_N = 9 ** n   # 9^n
     
     # find the upper bound for k-digit number
@@ -28,5 +28,15 @@ def digit_n_powers(n):
     
     return sum(
         x for x in range(2, upper + 1)
-        if x == sum(pow_d[ord(c) - ord('0')] for c in str(x))
+        if x == sum(POW_D[ord(c) - ord('0')] for c in str(x))
     )
+
+def digit_n_powers(n):
+    number, k = 10, 2
+    total = 0
+    while k * (9 ** n) >= 10 ** (k - 1):
+        if number == sum((int(num) ** n) for num in str(number)):
+            total += number
+        number += 1
+        k = len(str(number))
+    return total
