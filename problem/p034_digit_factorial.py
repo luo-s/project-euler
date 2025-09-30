@@ -5,7 +5,7 @@
 # Note: as 1! = 1 and 2! = 2 are not sums they are not included.
 
 # for a k-digit number, 
-# 1) the largest sum of factorial is k * 9! must be larger than 10^(k-1).
+# 1) the largest sum of factorial is k * 9! must >= 10^(k-1).
 import math
 def digitFactorial():
     ans = {
@@ -13,7 +13,7 @@ def digitFactorial():
         'numbers': []
     }
     n, k = 10, 2
-    while k * math.factorial(9) > 10 ** (k - 1):
+    while k * math.factorial(9) >= 10 ** (k - 1):
         if sum([math.factorial(int(num)) for num in str(n)]) == n:
             ans['sum'] += n
             ans['numbers'].append(n)
