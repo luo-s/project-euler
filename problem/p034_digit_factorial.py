@@ -14,7 +14,7 @@ def digitFactorial():
     }
     n, k = 10, 2
     while k * math.factorial(9) >= 10 ** (k - 1):
-        if sum([math.factorial(int(num)) for num in str(n)]) == n:
+        if sum([math.factorial(int(c)) for c in str(n)]) == n:
             ans['sum'] += n
             ans['numbers'].append(n)
         n += 1
