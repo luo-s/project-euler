@@ -6,9 +6,39 @@
 
 # Find the pair of pentagonal numbers, Pj and Pk, for which their sum and difference are pentagonal and D = |Pk − Pj| is minimized; what is the value of D?
 
-# pj = j(3j - 1)/2 = 1/2 * (3 * j^2 - j)
-# pk = k(3k - 1)/2 = 1/2 * (3 * k^2 - k)
-# pk + pj = 1/2 () 
-
+import math
 def pentagon_num():
-    
+    # Search for minimal D where both sum and difference are pentagonal
+    best_D = float('inf')
+    best_pair = None
+    pent_cache = [0]  # 1-indexed pentagonal numbers
+
+    k = 1
+    while True:
+        k += 1
+        Pk = pent(k)
+        pent_cache.append(Pk)
+
+        for j in range(k - 1, 0, -1):
+            diff = Pk - pent_cache[j]
+            if diff >= best_D:
+                break  # no smaller difference possible
+
+            if is_pent(diff) and is_pent(Pk + pent_cache[j]):
+                best_D = diff
+                return best_D
+
+
+def pent(n: int) -> int:
+    """Return the n-th pentagonal number."""
+    return n * (3 * n - 1) // 2
+
+def is_pent(x: int) -> bool:
+    """Check if x is a pentagonal number using the inverse formula."""
+    if x <= 0:
+        return False
+    d = 1 + 24 * x
+    s = math.isqrt(d)
+    if s * s != d:
+        return False
+    return (1 + s) % 6 == 0
