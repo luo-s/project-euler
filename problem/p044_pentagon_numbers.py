@@ -10,14 +10,13 @@ import math
 def pentagon_num():
     # Search for minimal D where both sum and difference are pentagonal
     best_D = float('inf')
-    best_pair = None
-    pent_cache = [0]  # 1-indexed pentagonal numbers
+    pent_cache = {1:pent(1)}  # dictionary of pentagonal numbers
 
     k = 1
     while True:
         k += 1
         Pk = pent(k)
-        pent_cache.append(Pk)
+        pent_cache[k] = (Pk)
 
         for j in range(k - 1, 0, -1):
             diff = Pk - pent_cache[j]
@@ -30,15 +29,10 @@ def pentagon_num():
 
 
 def pent(n: int) -> int:
-    """Return the n-th pentagonal number."""
+    # Return the n-th pentagonal number
     return n * (3 * n - 1) // 2
 
-def is_pent(x: int) -> bool:
-    """Check if x is a pentagonal number using the inverse formula."""
-    if x <= 0:
-        return False
-    d = 1 + 24 * x
-    s = math.isqrt(d)
-    if s * s != d:
-        return False
-    return (1 + s) % 6 == 0
+def is_pent(x):
+    # Reverse formula: n = (1 + sqrt(1 + 24x)) / 6
+    n = (1 + math.sqrt(1 + 24 * x)) / 6
+    return n.is_integer()
