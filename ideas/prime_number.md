@@ -6,7 +6,7 @@ The most straightforward way to check is to follow the definition of prime numbe
 
 ```
 def isPrime(n):
-    if n <= 1:
+    if n < 2:
         return False
 
     # Check divisibility from 2 to n-1
@@ -25,12 +25,13 @@ This approach is slow with $O(\sqrt{n})$ Time and $O(1)$ space.
 ```
 import math
 
-def isPrime(n):
-    if n <= 1:
+def is_prime(n):
+    if n < 2:
         return False
 
-    # Check divisibility from 2 to the square root of n
-    for i in range(2, math.isqrt(n) + 1):
+    # Check divisibility from 2 to sqrt(n)
+    limit = math.isqrt(n)
+    for i in range(2, limit + 1):
         if n % i == 0:
             return False
 
@@ -117,7 +118,8 @@ def sieve_of_eratosthenes(n):
     for p in range(2, math.isqrt(n) + 1):
         if is_prime[p]:
             # Mark multiples of p as False (composite)
-            for multiple in range(p*p, n+1, p):
+            # start form p * p, since 2 * p, 3 * p, ... (p - 1) * p have already been marked when processing smaller primes
+            for multiple in range(p * p, n + 1, p):
                 is_prime[multiple] = False
 
     # Extract all primes
