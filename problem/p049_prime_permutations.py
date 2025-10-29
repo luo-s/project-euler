@@ -4,7 +4,7 @@
 
 # What 12-digit number do you form by concatenating the three terms in this sequence?
 
-# brute force O(n^3)
+# brute force O(n^3) (49s)
 import math
 def prime_permutations():
     # all 4-digit primes
@@ -17,7 +17,33 @@ def prime_permutations():
                 if sorted(s1) == sorted(s2) == sorted(s3) and primes[b] - primes[a] == primes[c] - primes[b] and s1 != '1487':
                     return int(s1 + s2 + s3)
 
+# optimized solution (0.01s)
+from collections import defaultdict
+def prime_permutations():
+    # all 4-digit primes
+    primes = [p for p in sieve_of_eratosthenes(10000) if 1000 <= p < 10000]
 
+    # group by digit signature (sorted digits)
+    groups = defaultdict(list)
+    for p in primes:
+        groups[''.join(sorted(str(p)))].append(p)
+
+    for sig, grp in groups.items():
+        if len(grp) < 3:
+            continue
+        grp.sort()
+        s = set(grp)
+        # look for 3-term arithmetic sequences p, q, r within the group
+        for i in range(len(grp) - 1):
+            p = grp[i]
+            for j in range(i + 1, len(grp)):
+                q = grp[j]
+                r = 2*q - p
+                if r in s:
+                    # skip the known example from Euler (1487, 4817, 8147)
+                    if (p, q, r) == (1487, 4817, 8147):
+                        continue
+                    return int(f"{p}{q}{r}")
 
 def sieve_of_eratosthenes(n):
     if n < 2:
